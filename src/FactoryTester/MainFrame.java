@@ -264,7 +264,8 @@ public class MainFrame extends JFrame {
 				setIconImage(tool.getImage(MainFrame.class.getResource("FactoryTest.png")));
 
 				setResizable(false);
-				setTitle("kyChu.FactoryTester V1.2.0");
+//				setTitle("kyChu.FactoryTester V1.0.0");
+				setTitle("F1/2·É¿Ø°å²âÊÔ¹¤¾ß  V1.1.0");
 				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				addWindowListener(wl);
 				setSize(1000, 580);
@@ -322,7 +323,7 @@ public class MainFrame extends JFrame {
 	    public void serialEvent(SerialPortEvent serialPortEvent) {
 	        switch (serialPortEvent.getEventType()) {
 	            case SerialPortEvent.BI: // 10 Í¨Ñ¶ÖÐ¶Ïs
-	            	JOptionPane.showMessageDialog(null, "communication interrupted!", "error!", JOptionPane.ERROR_MESSAGE);
+//	            	JOptionPane.showMessageDialog(null, "communication interrupted!", "error!", JOptionPane.ERROR_MESSAGE);
 	            break;
 	            case SerialPortEvent.OE: // 7 ÒçÎ»£¨Òç³ö£©´íÎó
 	            case SerialPortEvent.FE: // 9 Ö¡´íÎó
@@ -617,12 +618,27 @@ public class MainFrame extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			LEDValue = 0;
 			int red = 0, blue = 0, green = 0;
-			if(Red_Box.isSelected()) {
-				red = 255; LEDValue |= (byte)0x01;
-			} if(Blue_Box.isSelected()) {
-				blue = 255; LEDValue |= (byte)0x02;
-			} if(Green_Box.isSelected()) {
-				green = 255; LEDValue |= (byte)0x04;
+			String name = ((JCheckBox)e.getSource()).getText();
+			if(name.equals("ºì")) {
+				if(Red_Box.isSelected()) {
+					Blue_Box.setSelected(false);
+					Green_Box.setSelected(false);
+					red = 255; LEDValue |= (byte)0x01;
+				}
+			}
+			else if(name.equals("À¶")) {
+				if(Blue_Box.isSelected()) {
+					Red_Box.setSelected(false);
+					Green_Box.setSelected(false);
+					blue = 255; LEDValue |= (byte)0x02;
+				}
+			}
+			else if(name.equals("ÂÌ")) {
+				  if(Green_Box.isSelected()) {
+					Red_Box.setSelected(false);
+					Blue_Box.setSelected(false);
+					green = 255; LEDValue |= (byte)0x04;
+				}
 			}
 			if(red == 0 && blue == 0 && green == 0)
 				red = blue = green = 120;
